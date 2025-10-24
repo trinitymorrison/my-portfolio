@@ -1,0 +1,114 @@
+---
+title: "Business Insights Report"
+author: "Trinity Morrison - 667749766"
+date: "October 2025"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+Dataset
+```{r}
+# Load ggplot2
+# Load ggplot2
+library(ggplot2)
+business_data <- read.csv("business_performance.csv")
+```
+# Data Setup and Business Context 
+Question 1
+
+
+a)
+
+```{r}
+str(business_data)
+summary(business_data) 
+length(unique(business_data$channel)) 
+length(unique(business_data$quarter))  
+```
+
+Based on the data above there are 3 (channels online retail and mobile), 4 quarters represented. The range of revenue values is 150,231 to 412,125
+
+
+b)
+
+```{r}
+total_revenue_by_channel <- aggregate(revenue ~ channel, data = business_data, sum)
+total_revenue_by_channel
+
+total_revenue_by_channel[which.max(total_revenue_by_channel$revenue), ]
+```
+
+The channel that generates the most revenue is online at 5571130. 
+
+```{r}
+avg_customers_by_quarter <- aggregate(customers ~ quarter, data = business_data, mean)
+avg_customers_by_quarter
+
+avg_customers_by_quarter[which.max(avg_customers_by_quarter$customers), ]
+```
+
+Quarter 3 typically has the most customers at 1173. 
+
+c)
+
+```{r}
+business_data$revenue_per_customer <- business_data$revenue / business_data$customers
+
+avg_revenue_per_customer <- aggregate(revenue_per_customer ~ channel,                                data=business_data,                      mean)
+avg_revenue_per_customer
+```
+
+The retail channel has the highest revenue per customer at 314.22. This tells us that the retail channel generates the most revenue per customer but that does not mean they make the most total revenue. This can be explained because retail has little amounts of customers but is able to sell the most to them. Overall just because retail has the higher revenue per customer doesn't mean that it brings the most total revenue.   
+
+# Business Visualizations
+Question 2
+
+a) 
+
+```{r}
+# Calculate totals first
+channel_totals <- aggregate(revenue ~ channel, data = business_data, sum)
+# Then create the chart
+ggplot(channel_totals, aes(x = channel, y = revenue)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Revenue by Channel", 
+       x = "Sales Channel", y = "Revenue ($)")
+```
+
+The best decision would be to invest more money in the channel that is making the highest total revenue and revue per customer. In this case, according to the bar chart, it is obvious that the online sales channel creates the most revenue, therefore should be the one that it invested in.
+
+b)
+```{r}
+ggplot(business_data, aes(x = customers, y = revenue, color = channel)) +
+  geom_point(size = 3) +
+  labs(title = "Customer Count vs Revenue by Channel",
+       x = "Number of Customers", y = "Revenue ($)")
+```
+
+Based on the scatter plot graph retail appears most efficient at converting customers to revenue. This is because retail points sit higher on the revenue axis in relation to the number of customers, proving a higher revenue per customer. In saying this, online and mobile channels have more customers but generate less revenue per customer. The graph makes it clear that, for each individual customer, retail produces the most revenue, showing the highest efficiency in customer to revenue conversion.  
+
+# Strategic Business Recommendations
+Question 3 
+
+a)
+```{r}
+total_revenue <- aggregate(revenue ~ channel, data = business_data, sum)
+avg_customers <- aggregate(customers ~ channel, data = business_data, mean)
+avg_conversion <- aggregate(conversion_rate ~ channel, data = business_data, mean, na.rm =TRUE)
+
+summary_table <- data.frame(
+  Channel = total_revenue$channel,
+  Total_Revenue = total_revenue$revenue,
+  Avg_Quarterly_Customers = avg_customers$customers,
+  Avg_Conversion_Rate = avg_conversion$conversion_rate)
+summary_table
+```
+
+Here is a professional summary table that is clear and business ready as. This makes the information very clear and easy to interpret.
+
+b)
+The analysis shows that the online channel brings in the most total revenue at $5,571,130, compared to mobile ($4,158,056) and retail ($2,693,023). Retail generates the highest revenue per customer at $314.22, showing that shoppers spend more per visit. To increase overall performance, the business should focus on growing online sales by improving website quality, user experience, and targeted marketing. Additionally, introducing personalized recommendations or promotions  could increase revenue per online customer. This would be ideal as online also shows to have the most customers per quarter at 1560 whereas retail only has 542. 
+
+[← Back to Projects](projects.html) | [← Back to Home](index.html)

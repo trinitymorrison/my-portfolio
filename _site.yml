@@ -1,0 +1,16 @@
+name: "my-portfolio"
+navbar:
+  title: "My Portfolio"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Project 2"
+      href: project2.html
+    - text: "Project 3"
+      href: project3.html
+output_dir: "docs"
+output:
+  html_document:
+    theme: cosmo

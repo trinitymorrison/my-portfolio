@@ -1,0 +1,50 @@
+---
+title: "About"
+---
+
+## Background
+
+I'm a second-year student at VIU, developing skills 
+in data analysis, business intelligence, and statistical computing.
+
+## Skills & Tools
+
+**Analysis:**
+
+- R for data analysis
+- Data cleaning and transformation
+- Statistical analysis and interpretation
+
+**Visualization & Reporting:**
+
+- ggplot2 for professional visualizations
+- R Markdown for reproducible reports
+- Data storytelling for business audiences
+
+**Data Sources:**
+
+- CSV file processing
+- Government open data (via APIs)
+- Business performance datasets
+
+## Education
+
+**VIU** - BBA Program  
+*Expected Graduation: [2028]*
+
+Relevant Coursework:
+
+- Data Analysis for E-Management
+- Business Statistics
+- Information Systems
+
+## Contact
+
+Feel free to connect with me:
+
+- Email: [trinitymorrison4@gmail.com](https://mail.google.com/mail/u/0/#inbox)
+- LinkedIn: [Trinity Morrison](https://www.linkedin.com/in/trinity-morrison-5a4364390/)
+
+---
+
+[← Back to Home](index.html)

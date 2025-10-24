@@ -1,0 +1,176 @@
+---
+title: "Business Data Analysis Report"
+author: "Trinity Morrison--667749766"
+date: "October 2025"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: '2'
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+subtitle: CSV Import and Data Cleaning
+---
+
+# Load ggplot2
+# Load ggplot2
+library(ggplot2)
+
+
+Dataset
+
+```{r} 
+# Load ggplot2
+# Load ggplot2
+library(ggplot2)
+
+# Load the business dataset
+business_data <- read.csv("business_performance.csv")
+
+```
+
+
+# Data Import and Exploration
+
+Question 1
+
+a)
+```{r}
+str(business_data)
+```
+The amount of observations are 16 and the amount of variables are 4. The types of variables include region (character), quarter (character), revenue (number), and customer (number).
+
+
+b)
+```{r}
+head(business_data)
+```{r}
+summary(business_data)
+```
+The revenue ranges from 89000-155000. The first 6 rows of regions read as North, South, East, West, North, South
+
+c)
+```{r}
+unique(business_data$region)
+```
+```{r}
+unique(business_data$quarter)
+```
+There are 4 regions (North, South, East, West) and 4 quarters (Q1, Q2, Q3, Q4) represented.
+
+d)
+```{r}
+sum(business_data$customers)
+```
+The total of 7330 tells the company that they served that many customers across all regions and quarters in that year.This data can be used year to year as a benchmark to show growth or decay in the company. 
+
+Question 2
+
+a)
+```{r}
+sum(is.na(business_data))
+```
+There are 0 missing values in the dataset. This is important because companies should have no missing values as that would make data not reliable or accurate. 
+
+b) 
+```{r}
+table(business_data$region)
+```
+```{r}
+table(business_data$quarter)
+```
+Yes the data is evenly distributed across regions and quarters (4 in each). This means the business is tracking each region in each quarter. Everything is up to date and accurate.  
+
+c)
+```{r}
+business_data[business_data$revenue < 90000, ]
+```
+The South region during quarter 3 is concerning when revenue falls to 89000 and 350 customers. This could be a wrong data entry or a true challenge point in the company.
+
+
+# Business Logic Analysis
+
+Question 3
+
+a)
+```{r}
+business_data[business_data$revenue > 140000, ]
+```
+```{r}
+sum(business_data$revenue > 140000)
+```
+The regions and quarters that are greater than $140,000 are North Q3 and Q4, and East Q4. There are 3 high performance records. This data tells the company that the North region preforms better in the last half. The East also shows high performance in Q4. 
+
+b)
+```{r}
+business_data[business_data$quarter == "Q4" & business_data$revenue > 130000 & business_data$customers > 500, ]
+business_data
+```
+This tells us that in Q4 across the North and East region there is high performance with revenue above 130,000 and more than 500 customers.
+
+c)
+```{r}
+north_east <- business_data[business_data$region == "North" | business_data$region == "East", ]
+```
+```{r}
+mean(north_east$revenue)
+```
+```{r}
+mean(business_data$revenue)
+```
+The combined average for North and East is $135750. This is exceeds the company average of $122937.5 by $12812.50.   
+
+d)
+```{r}
+business_data$performance_flag <- ifelse(
+  business_data$revenue < 100000 | business_data$customers < 400,
+  "Concerning", "Healthy"
+)
+business_data
+```
+There are 3 concerning records South Q1 (98000 revenue and 380 customers), West Q1 (395 customers), and South Q3 (89000 revenue and 350 customers). Because there are 16 records and 3 are concerning 18.75% is the total they represent. 
+
+# Data Quality Assessment
+
+Question 4 
+
+a)
+```{r}
+aggregate(revenue ~ region, data = business_data, sum)
+```
+The North region generates the highest amount of of total revenue across the company. The most growth will happen if investments are made in this region over any of the others. 
+
+b)
+```{r}
+aggregate(customers ~ quarter, data = business_data, mean)
+```
+Quarter 4 shows the highest average amount of customers in a quarter. This can be explained by the fact there is more demand at the end of the year because of holidays or extra money not spent throughout the year Overall people tend to buy more in Q4 of the year.It could also be that this is the time of year the company launches new items. 
+
+# Executive Summary
+
+Question 5
+
+a)
+```{r}
+sum(business_data$revenue)
+```
+```{r}
+aggregate(revenue ~ quarter, data = business_data, mean)
+```
+```{r}
+sum(business_data$revenue > 140000)
+```
+Total revenue across all regions and quarters: $1,963,000
+Average revenue per quarter:
+Q1 = $110,000
+Q2 = $122,250
+Q3 = $122,750
+Q4 = $137,000
+Number of high-performance records (revenue > $140,000): 3
+The company generated $1,963,000 in total revenue across all quarters. In this Q4 was the strongest for average revenue making.There are 3 standout high-performance records
+
+b)
+Based on the above analysis, the North region provides the most consistent average revenue totals. In Q1 the total was $125,000 and Q4 the total was $155,000. Q4 delivers the strongest results, achieving the highest average revenue of $137,000 and the largest customer base (average 512 customers). Given these trends, the North region deserves continued investment, and enhancing sales strategies in Q4 could further leverage its seasonal strength
+
+[← Back to Projects](projects.html) | [← Back to Home](index.html)
