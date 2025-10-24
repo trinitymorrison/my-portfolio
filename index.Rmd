@@ -6,7 +6,7 @@ title: "Welcome to My Portfolio"
 
 I'm Trinity Morrison a second year student at VIU in the BBA program, developing skills in data analysis, business intelligence, and statistical computing.
 
-
+## Skills and Tools
 Data cleaning and transformation
 - Statistical analysis
 - Data visualization with ggplot2
