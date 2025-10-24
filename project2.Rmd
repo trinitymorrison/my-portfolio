@@ -3,9 +3,6 @@ title: "Business Data Analysis Report"
 author: "Trinity Morrison--667749766"
 date: "October 2025"
 output:
-  pdf_document:
-    toc: true
-    toc_depth: '2'
   html_document:
     toc: true
     toc_depth: 2
